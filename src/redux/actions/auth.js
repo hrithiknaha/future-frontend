@@ -22,7 +22,7 @@ export const registerUser = (firstname, lastname, username, password, navigate) 
             type: LOGIN_USER,
             payload: { username, token, exp },
         });
-        navigate(`/profile/${username}`);
+        navigate(`/`);
     });
     console.log({ firstname, lastname, username, password });
 };
@@ -46,7 +46,7 @@ export const loginUser = (username, password, navigate) => (dispatch) => {
                 type: LOGIN_USER,
                 payload: { username, token, exp },
             });
-            navigate(`/profile/${username}`);
+            navigate(`/`);
             toast.success("Sweet!");
         })
         .catch((err) => {

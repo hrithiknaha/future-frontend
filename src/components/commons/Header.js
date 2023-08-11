@@ -19,8 +19,8 @@ const Header = () => {
             <div className="container mx-auto flex justify-between items-center p-4">
                 <div className="text-white font-semibold text-lg">Future</div>
                 {auth.username ? (
-                    <div className="flex">
-                        <Link className="text-white">Profile</Link>
+                    <div className="flex gap-4 items-center">
+                        <Link className="text-white">{auth.username}</Link>
                         <button
                             onClick={handleLogout}
                             className="bg-blue-500 text-white hover:bg-blue-600 font-semibold py-2 px-4 rounded outline">
@@ -28,10 +28,8 @@ const Header = () => {
                         </button>
                     </div>
                 ) : (
-                    <button
-                        onClick={handleLogout}
-                        className="bg-blue-500 text-white hover:bg-blue-600 font-semibold py-2 px-4 rounded outline">
-                        <Link>Login</Link>
+                    <button className="bg-blue-500 text-white hover:bg-blue-600 font-semibold py-2 px-4 rounded outline">
+                        <Link to={"/login"}>Login</Link>
                     </button>
                 )}
             </div>
