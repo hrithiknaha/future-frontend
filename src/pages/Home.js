@@ -5,7 +5,7 @@ const Home = () => {
         <div className="min-h-screen bg-gray-100">
             <div className="container mx-auto flex flex-col py-40 items-center p-4">
                 <div className="text-center">
-                    <h1 className="text-3xl font-semibold mb-2">Welcome to Future</h1>
+                    <h1 className="text-3xl font-semibold mb-2">Welcome to Future!</h1>
                     <p className="mb-4">Explore and discover your favorite books</p>
                 </div>
                 <div className="w-full max-w-md flex">
