@@ -14,7 +14,7 @@ const Home = () => {
                         placeholder="Search for books"
                         className="flex-grow px-4 py-2 rounded-md border border-gray-300 focus:ring focus:ring-blue-300 focus:border-blue-400"
                     />
-                    <button className="px-4 py-2 bg-blue-500 text-white rounded-md">Search</button>
+                    <button className="px-4 py-2 bg-blue-500 text-white rounded-md">Search Book</button>
                 </div>
             </div>
         </div>
