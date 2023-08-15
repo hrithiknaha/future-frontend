@@ -61,6 +61,7 @@ const Home = () => {
                                         <p className="text-gray-600 text-xs">{book.volumeInfo.pageCount} pages</p>
                                         <p className="text-gray-600 text-xs">{book.volumeInfo.publishedDate}</p>
                                     </div>
+                                    <p className="text-gray-600 text-m pt-2">{book.volumeInfo.categories}</p>
                                 </div>
                             </Link>
                         ))}
