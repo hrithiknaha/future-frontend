@@ -29,6 +29,8 @@ export const extractIdFromUrl = (title) => {
 };
 
 export const makeGenreBetter = (genres) => {
+    if (!genres) return [];
+
     const uniqueGenresArray = [];
 
     genres.forEach((genre) => {
@@ -41,4 +43,8 @@ export const makeGenreBetter = (genres) => {
     });
 
     return uniqueGenresArray;
+};
+
+export const findBookCompletion = (pageCount, currentPage) => {
+    return ((currentPage / pageCount) * 100).toFixed(2);
 };
