@@ -17,7 +17,9 @@ const Header = () => {
     return (
         <div className=" bg-blue-500">
             <div className="container mx-auto flex justify-between items-center p-4">
-                <div className="text-white font-semibold text-lg">Future</div>
+                <Link to="/" className="text-white font-semibold text-lg">
+                    Future
+                </Link>
                 {auth.username ? (
                     <div className="flex gap-4 items-center">
                         <Link className="text-white">{auth.username}</Link>
