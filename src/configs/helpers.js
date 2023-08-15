@@ -12,3 +12,33 @@ export const retrieveAccessToken = () => {
     const { username, exp } = jwtDecode(token);
     return { username, token, exp };
 };
+
+export const convertTitleToUrl = (id, title) => {
+    const cleanText = title
+        .replace(/[^\w\s]/gi, "")
+        .split(" ")
+        .filter((s) => s !== "")
+        .join(" ");
+    const title_split = cleanText.toLowerCase().split(" ");
+    const elements = [id.toString(), ...title_split];
+    return elements.join("-");
+};
+
+export const extractIdFromUrl = (title) => {
+    return title.split("-")[0];
+};
+
+export const makeGenreBetter = (genres) => {
+    const uniqueGenresArray = [];
+
+    genres.forEach((genre) => {
+        const individualGenres = genre.split(" / ");
+        individualGenres.forEach((individualGenre) => {
+            if (!uniqueGenresArray.includes(individualGenre)) {
+                uniqueGenresArray.push(individualGenre);
+            }
+        });
+    });
+
+    return uniqueGenresArray;
+};

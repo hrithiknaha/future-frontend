@@ -36,7 +36,6 @@ export const loginUser = (username, password, navigate) => (dispatch) => {
     axiosPublicInstance
         .post("/api/auth/login", payload)
         .then((response) => {
-            console.log(response);
             const token = response.data.accessToken;
 
             localStorage.setItem("token", token);
