@@ -39,40 +39,43 @@ const Profile = () => {
                     <div className="mx-auto p-6 bg-white shadow-md rounded">
                         <h1 className="text-2xl">Hi, {user.username}</h1>
                         <BookStatus statuses={computeBookStatus(user.books)} />
-                        <div className="mt-4 flex flex-wrap gap-4 w-full">
-                            {user.books
-                                .sort((a, b) => (a.updatedAt < b.updatedAt ? 1 : -1))
-                                .map((book) => (
-                                    <Link
-                                        to={`/books/${convertTitleToUrl(book.id, book.title)}`}
-                                        key={book.id}
-                                        className="flex-none flex flex-col w-full md:w-56 lg:w-64 bg-white shadow-md rounded-md overflow-hidden">
-                                        <div className="flex flex-col justify-between w-full h-full p-4">
-                                            <div className="text-xs flex justify-between">
-                                                <h2 className="font-semibold">{book.title}</h2>
-                                                <p
-                                                    className={`p-1 rounded ${
-                                                        book.status === "Completed"
-                                                            ? "bg-green-500 text-white"
-                                                            : book.status === "Reading"
-                                                            ? "bg-blue-500 text-white"
-                                                            : book.status === "TBR"
-                                                            ? "bg-purple-500 text-white"
-                                                            : book.status === "Stopped"
-                                                            ? "bg-red-500 text-white"
-                                                            : ""
-                                                    }`}>
-                                                    {book.status}
-                                                </p>
-                                            </div>
+                        <div className="mt-4">
+                            <h1>My Books</h1>
+                            <div className="mt-4 flex flex-wrap gap-4 w-full">
+                                {user.books
+                                    .sort((a, b) => (a.updatedAt < b.updatedAt ? 1 : -1))
+                                    .map((book) => (
+                                        <Link
+                                            to={`/books/${convertTitleToUrl(book.id, book.title)}`}
+                                            key={book.id}
+                                            className="flex-none flex flex-col w-full md:w-56 lg:w-64 bg-white shadow-md rounded-md overflow-hidden">
+                                            <div className="flex flex-col justify-between w-full h-full p-4">
+                                                <div className="text-xs flex justify-between">
+                                                    <h2 className="font-semibold">{book.title}</h2>
+                                                    <p
+                                                        className={`p-1 rounded ${
+                                                            book.status === "Completed"
+                                                                ? "bg-green-500 text-white"
+                                                                : book.status === "Reading"
+                                                                ? "bg-blue-500 text-white"
+                                                                : book.status === "TBR"
+                                                                ? "bg-purple-500 text-white"
+                                                                : book.status === "Stopped"
+                                                                ? "bg-red-500 text-white"
+                                                                : ""
+                                                        }`}>
+                                                        {book.status}
+                                                    </p>
+                                                </div>
 
-                                            <p className="text-gray-600 text-xs pt-1">{book.authors}</p>
-                                            <div className="flex justify-between mt-2">
-                                                <p className="text-gray-600 text-xs">{book.pageCount} pages</p>
+                                                <p className="text-gray-600 text-xs pt-1">{book.authors}</p>
+                                                <div className="flex justify-between mt-2">
+                                                    <p className="text-gray-600 text-xs">{book.pageCount} pages</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </Link>
-                                ))}
+                                        </Link>
+                                    ))}
+                            </div>
                         </div>
                     </div>
                 )}
