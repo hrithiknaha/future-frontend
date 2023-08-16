@@ -81,6 +81,23 @@ const Profile = () => {
                                                     <p className="text-gray-600 text-xs">{book.pageCount} pages</p>
                                                 </div>
                                             </div>
+                                            <div className="h-3 w-full bg-gray-300">
+                                                <div
+                                                    className={`h-3 ${
+                                                        book.status === "Completed"
+                                                            ? "bg-green-500 text-white"
+                                                            : book.status === "Reading"
+                                                            ? "bg-blue-500 text-white"
+                                                            : book.status === "TBR"
+                                                            ? "bg-purple-500 text-white"
+                                                            : book.status === "Stopped"
+                                                            ? "bg-red-500 text-white"
+                                                            : ""
+                                                    }`}
+                                                    style={{
+                                                        width: `${(book.currentPage / book.pageCount) * 100}%`,
+                                                    }}></div>
+                                            </div>
                                         </Link>
                                     ))}
                             </div>
