@@ -16,7 +16,7 @@ const Book = () => {
     const [book, setBook] = useState();
     const [isLoading, setIsLoading] = useState(true);
 
-    const [bookAddedDetails, setBookAddedDetails] = useState([]);
+    const [bookAddedDetails, setBookAddedDetails] = useState();
     const [booksInList, setBooksInList] = useState(false);
 
     const [sentRequestToAdd, setSentRequestToAdd] = useState(false);
@@ -27,6 +27,8 @@ const Book = () => {
 
     const [rating, setRating] = useState();
     const [sentRequestToFinish, setSentRequestToFinish] = useState(false);
+
+    const [dataLoading, setDataLoading] = useState();
 
     useEffect(() => {
         const id = extractIdFromUrl(bookId);
@@ -55,7 +57,7 @@ const Book = () => {
     }, [bookId]);
 
     useEffect(() => {
-        setIsLoading(true);
+        setDataLoading(true);
         const id = extractIdFromUrl(bookId);
 
         const axiosInstance = axiosPrivateInstance(auth);
@@ -63,11 +65,11 @@ const Book = () => {
             if (!data?.id) {
                 setBooksInList(false);
                 setBookAddedDetails(null);
-                setIsLoading(false);
+                setDataLoading(false);
             } else {
                 setBooksInList(true);
                 setBookAddedDetails(data);
-                setIsLoading(false);
+                setDataLoading(false);
             }
         });
     }, [sentRequestToAdd, sentRequestToStart, sentRequestToUpdatePage, sentRequestToFinish]);
@@ -142,7 +144,9 @@ const Book = () => {
                             <h1 className="text-2xl font-semibold">{book.volumeInfo.title}</h1>
 
                             {booksInList ? (
-                                bookAddedDetails.status === "Reading" ? (
+                                dataLoading ? (
+                                    <div className="animate-spin h-4 w-4 border-t-2 border-blue-500 border-solid rounded-full"></div>
+                                ) : bookAddedDetails.status === "Reading" ? (
                                     <div className="bg-green-500 px-4 py-1 rounded-lg shadow-md text-white flex gap-4 items-center justify-between">
                                         {findBookCompletion(bookAddedDetails.pageCount, bookAddedDetails.currentPage)}%
                                     </div>
