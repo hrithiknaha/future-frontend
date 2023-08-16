@@ -23,11 +23,10 @@ const Stats = () => {
         const axiosInstance = axiosPrivateInstance(auth);
 
         axiosInstance.get(`/api/stats/${username}`).then(({ data }) => {
-            console.log(data);
-            if (!data.success) {
+            if (data.success) {
                 toast.success("No Books for Stats!");
                 navigate(`/profile/${username}`);
-            } else if (rating?.rating) {
+            } else if (data?.totalBooks) {
                 setStats(data);
                 setIsLoading(false);
             } else {
