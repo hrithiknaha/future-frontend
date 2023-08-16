@@ -14,8 +14,8 @@ const BookStatus = ({ statuses }) => {
     }, []);
 
     return (
-        <div className="mt-4 p-4 bg-blue-500 text-white rounded">
-            <div className="text-xs text-center flex justify-between items-center">
+        <div className="max-w-md mt-4 py-2 px-4 bg-blue-500 text-white rounded">
+            <div className="text-xs md:text-sm text-center flex justify-between items-center">
                 <div>
                     <div>All</div>
                     <div>{totalCount}</div>
