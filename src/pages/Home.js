@@ -26,7 +26,7 @@ const Home = () => {
 
     return (
         <div className="min-h-screen bg-gray-100">
-            <div className="container mx-auto flex flex-col py-40 items-center p-4 md:p-0">
+            <div className="container mx-auto flex flex-col py-40 items-center p-4">
                 <div className="text-center">
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-2">Welcome to Future!</h1>
                     <p className="mb-4">Explore and discover your favorite books</p>
