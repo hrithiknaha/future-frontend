@@ -48,3 +48,17 @@ export const makeGenreBetter = (genres) => {
 export const findBookCompletion = (pageCount, currentPage) => {
     return ((currentPage / pageCount) * 100).toFixed(2);
 };
+
+export const computeBookStatus = (books) => {
+    const statsMap = new Map([
+        ["Completed", 0],
+        ["Reading", 0],
+        ["TBR", 0],
+        ["Stopped", 0],
+    ]);
+
+    for (const book of books) {
+        statsMap.set(book.status, (statsMap.get(book.status) || 0) + 1);
+    }
+    return Array.from(statsMap, ([status, count]) => ({ status, count }));
+};
