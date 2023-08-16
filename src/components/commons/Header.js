@@ -22,7 +22,9 @@ const Header = () => {
                 </Link>
                 {auth.username ? (
                     <div className="flex gap-4 items-center">
-                        <Link className="text-white">{auth.username}</Link>
+                        <Link to={`/profile/${auth.username}`} className="text-white">
+                            {auth.username}
+                        </Link>
                         <button
                             onClick={handleLogout}
                             className="bg-blue-500 text-white hover:bg-blue-600 font-semibold py-2 px-4 rounded outline">
