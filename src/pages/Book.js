@@ -28,6 +28,8 @@ const Book = () => {
     const [rating, setRating] = useState();
     const [sentRequestToFinish, setSentRequestToFinish] = useState(false);
 
+    const [sentRequestToStop, setSentRequestToStop] = useState(false);
+
     const [dataLoading, setDataLoading] = useState();
 
     useEffect(() => {
@@ -72,7 +74,7 @@ const Book = () => {
                 setDataLoading(false);
             }
         });
-    }, [sentRequestToAdd, sentRequestToStart, sentRequestToUpdatePage, sentRequestToFinish]);
+    }, [sentRequestToAdd, sentRequestToStart, sentRequestToUpdatePage, sentRequestToFinish, sentRequestToStop]);
 
     const handleAddBook = () => {
         const id = extractIdFromUrl(bookId);
@@ -126,6 +128,15 @@ const Book = () => {
         const axiosInstance = axiosPrivateInstance(auth);
         axiosInstance.post(`/api/books/${id}/end`, payload).then(({ data }) => {
             setSentRequestToFinish((prev) => !prev);
+        });
+    };
+
+    const handleStopBook = () => {
+        const id = extractIdFromUrl(bookId);
+
+        const axiosInstance = axiosPrivateInstance(auth);
+        axiosInstance.get(`/api/books/${id}/stop`).then(({ data }) => {
+            setSentRequestToStop((prev) => !prev);
         });
     };
 
@@ -191,10 +202,10 @@ const Book = () => {
                         </p>
 
                         {booksInList && bookAddedDetails.status === "Reading" && (
-                            <div>
+                            <div className="flex flex-col gap-4 mt-4">
                                 <form
                                     onSubmit={handlePageUpdate}
-                                    className="w-full max-w-md flex justify-between gap-4 pt-4">
+                                    className="w-full max-w-md flex justify-between gap-4">
                                     <input
                                         onChange={(e) => setPageCount(e.target.value)}
                                         defaultValue={bookAddedDetails.currentPage}
@@ -212,7 +223,7 @@ const Book = () => {
                                 </form>
                                 <form
                                     onSubmit={handleFinishBook}
-                                    className="w-full max-w-md flex justify-between gap-4 pt-4">
+                                    className="w-full max-w-md flex justify-between gap-4">
                                     <input
                                         onChange={(e) => setRating(e.target.value)}
                                         type="number"
@@ -226,6 +237,9 @@ const Book = () => {
                                         Finish
                                     </button>
                                 </form>
+                                <button onClick={handleStopBook} className="bg-red-500 text-white rounded py-2">
+                                    Stop
+                                </button>
                             </div>
                         )}
 

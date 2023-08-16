@@ -47,7 +47,7 @@ const Profile = () => {
                         <BookStatus statuses={computeBookStatus(user.books)} />
                         <div className="mt-4">
                             <h1 className="text-xs md:text-sm lg:text-base">My Books</h1>
-                            <div className="mt-4 flex flex-wrap justify-between gap-1 w-full md:gap-2 lg:gap-4">
+                            <div className="mt-4 flex flex-wrap justify-between gap-4 w-full md:gap-2 lg:gap-4">
                                 {user.books
                                     .sort((a, b) => (a.updatedAt < b.updatedAt ? 1 : -1))
                                     .map((book) => (
