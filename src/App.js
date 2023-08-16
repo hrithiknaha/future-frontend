@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Book from "./pages/Book";
 import Profile from "./pages/Profile";
+import Stats from "./pages/Stats";
 
 import PrivateRoute from "./components/configs/PrivateRoute";
 
@@ -20,6 +21,7 @@ function App() {
                     <Route path="" element={<PrivateRoute />}>
                         <Route path="books/:bookId" element={<Book />} />
                         <Route path="profile/:username" element={<Profile />} />
+                        <Route path="profile/:username/stats" element={<Stats />} />
                     </Route>
                 </Route>
             </Routes>

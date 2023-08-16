@@ -37,7 +37,13 @@ const Profile = () => {
                     <NotFound />
                 ) : (
                     <div className="mx-auto p-6 bg-white shadow-md rounded">
-                        <h1 className="text-2xl">Hi, {user.username}</h1>
+                        <div className="flex justify-between">
+                            <h1 className="text-2xl">Hi, {user.username}</h1>
+                            <Link to={"stats"} className="bg-blue-500 text-white rounded">
+                                <button className="px-4 py-1">Stats</button>
+                            </Link>
+                        </div>
+
                         <BookStatus statuses={computeBookStatus(user.books)} />
                         <div className="mt-4">
                             <h1>My Books</h1>
