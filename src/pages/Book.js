@@ -7,7 +7,6 @@ import { extractIdFromUrl, makeGenreBetter, findBookCompletion } from "../config
 
 import NotFound from "../components/configs/NotFound";
 import LoadingSpinner from "../components/configs/LoadingSpinner";
-import { formToJSON } from "axios";
 import moment from "moment";
 
 const Book = () => {
@@ -143,7 +142,7 @@ const Book = () => {
                             <h1 className="text-2xl font-semibold">{book.volumeInfo.title}</h1>
 
                             {booksInList ? (
-                                bookAddedDetails.status === "Started Reading" ? (
+                                bookAddedDetails.status === "Reading" ? (
                                     <div className="bg-green-500 px-4 py-1 rounded-lg shadow-md text-white flex gap-4 items-center justify-between">
                                         {findBookCompletion(bookAddedDetails.pageCount, bookAddedDetails.currentPage)}%
                                     </div>
@@ -187,7 +186,7 @@ const Book = () => {
                             {makeGenreBetter(book.volumeInfo.categories).join(", ")}
                         </p>
 
-                        {booksInList && bookAddedDetails.status === "Started Reading" && (
+                        {booksInList && bookAddedDetails.status === "Reading" && (
                             <div>
                                 <form
                                     onSubmit={handlePageUpdate}
@@ -220,7 +219,7 @@ const Book = () => {
                                     <button
                                         type="submit"
                                         className="px-1 py-2 bg-blue-500 text-white rounded text-sm w-full">
-                                        Finish Reading
+                                        Finish
                                     </button>
                                 </form>
                             </div>
