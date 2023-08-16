@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ResponsiveContainer, PieChart, Pie, Tooltip, Cell, XAxis, Bar, BarChart, YAxis } from "recharts";
+import { toast } from "react-hot-toast";
 
 import NotFound from "../components/configs/NotFound";
 import LoadingSpinner from "../components/configs/LoadingSpinner";
@@ -13,6 +14,7 @@ const COLORS = ["#003f5c", "#2f4b7c", "#665191", "#a05195", "#d45087", "#f95d6a"
 const Stats = () => {
     const { username } = useParams();
     const auth = useSelector((state) => state.auth);
+    const navigate = useNavigate();
 
     const [stats, setStats] = useState();
     const [isLoading, setIsLoading] = useState(true);
@@ -21,11 +23,15 @@ const Stats = () => {
         const axiosInstance = axiosPrivateInstance(auth);
 
         axiosInstance.get(`/api/stats/${username}`).then(({ data }) => {
-            if (!data?.totalBooks) {
-                setStats(null);
+            console.log(data);
+            if (!data.success) {
+                toast.success("No Books for Stats!");
+                navigate(`/profile/${username}`);
+            } else if (rating?.rating) {
+                setStats(data);
                 setIsLoading(false);
             } else {
-                setStats(data);
+                setStats(null);
                 setIsLoading(false);
             }
         });
@@ -39,24 +45,24 @@ const Stats = () => {
                     <NotFound />
                 ) : (
                     <div className="mx-auto p-6 bg-white shadow-md rounded">
-                        <h1 className="text-lg">Stats</h1>
-                        <div className="flex flex-wrap gap-2 mt-2 justify-between text-center">
-                            <div className="bg-white shadow-md rounded-lg p-4 w-24">
-                                <h2 className="text-sm font-semibold mb-2">Books</h2>
-                                <p className="text-xs font-bold text-orange-500">{stats.totalBooks}</p>
+                        <h1 className="text-lg md:text-xl lg:text-3xl">Stats</h1>
+                        <div className="flex flex-wrap gap-2 mt-2 justify-between md:justify-start text-center">
+                            <div className="bg-white shadow-md rounded-lg p-4 w-24 md:w-56 lg:w-64">
+                                <h2 className="text-sm md:text-lg font-semibold mb-2">Books</h2>
+                                <p className="text-xs md:text-base font-bold text-orange-500">{stats.totalBooks}</p>
                             </div>
-                            <div className="bg-white shadow-md rounded-lg p-4 w-24">
-                                <h2 className="text-sm font-semibold mb-2">Pages</h2>
-                                <p className="text-xs font-bold text-orange-500">{stats.totalPages}</p>
+                            <div className="bg-white shadow-md rounded-lg p-4 w-24 md:w-56 lg:w-64">
+                                <h2 className="text-sm md:text-lg font-semibold mb-2">Pages</h2>
+                                <p className="text-xs md:text-base font-bold text-orange-500">{stats.totalPages}</p>
                             </div>
-                            <div className="bg-white shadow-md rounded-lg p-4 w-24">
-                                <h2 className="text-sm font-semibold mb-2">Rating</h2>
-                                <p className="text-xs font-bold text-orange-500">{stats.averageRating}</p>
+                            <div className="bg-white shadow-md rounded-lg p-4 w-24 md:w-56 lg:w-64">
+                                <h2 className="text-sm md:text-lg font-semibold mb-2">Rating</h2>
+                                <p className="text-xs md:text-base font-bold text-orange-500">{stats.averageRating}</p>
                             </div>
                         </div>
 
                         <div className="flex flex-wrap">
-                            <div className="mt-8 flex flex-col justify-center items-center w-full h-64">
+                            <div className="mt-8 flex flex-col justify-center items-center w-full md:w-1/2 h-64">
                                 <ResponsiveContainer width="100%" height="100%">
                                     <PieChart>
                                         <Pie
@@ -73,7 +79,7 @@ const Stats = () => {
                                 </ResponsiveContainer>
                                 <h1 className="text-sm text-gray-500">STATUS</h1>
                             </div>
-                            <div className="mt-8 flex flex-col justify-center items-center w-full h-64">
+                            <div className="mt-8 flex flex-col justify-center items-center w-full md:w-1/2 h-64">
                                 <ResponsiveContainer width="100%" height="100%">
                                     <PieChart>
                                         <Pie
@@ -90,7 +96,7 @@ const Stats = () => {
                                 </ResponsiveContainer>
                                 <h1 className="text-sm text-gray-500">GENRES</h1>
                             </div>
-                            <div className="mt-8 flex flex-col justify-center items-center w-full h-64">
+                            <div className="mt-8 flex flex-col justify-center items-center w-full md:w-1/2 h-64">
                                 <ResponsiveContainer width="100%" height="100%">
                                     <PieChart>
                                         <Pie
@@ -107,7 +113,7 @@ const Stats = () => {
                                 </ResponsiveContainer>
                                 <h1 className="text-sm text-gray-500">LENGTH</h1>
                             </div>
-                            <div className="mt-8 flex flex-col justify-center items-center w-full h-64">
+                            <div className="mt-8 flex flex-col justify-center items-center w-full md:w-1/2 h-64">
                                 <ResponsiveContainer width="100%" height="100%">
                                     <PieChart>
                                         <Pie
