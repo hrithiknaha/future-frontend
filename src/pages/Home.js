@@ -29,7 +29,7 @@ const Home = () => {
             <div className="container mx-auto flex flex-col py-40 items-center p-4">
                 <div className="text-center">
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-2">Welcome to Future!</h1>
-                    <p className="mb-4">Explore and discover your favorite books</p>
+                    <p className="mb-4">Explore and discover your favorite books!</p>
                 </div>
                 <form onSubmit={handleSearchSubmit} className="w-full max-w-md flex gap-4 md:pt-8 lg:mt-12">
                     <input
