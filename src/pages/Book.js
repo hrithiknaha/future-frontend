@@ -30,6 +30,8 @@ const Book = () => {
 
     const [sentRequestToStop, setSentRequestToStop] = useState(false);
 
+    const [sentRequestToRestart, setSentRequestToRestart] = useState(false);
+
     const [dataLoading, setDataLoading] = useState();
 
     useEffect(() => {
@@ -74,7 +76,14 @@ const Book = () => {
                 setDataLoading(false);
             }
         });
-    }, [sentRequestToAdd, sentRequestToStart, sentRequestToUpdatePage, sentRequestToFinish, sentRequestToStop]);
+    }, [
+        sentRequestToAdd,
+        sentRequestToStart,
+        sentRequestToUpdatePage,
+        sentRequestToFinish,
+        sentRequestToStop,
+        sentRequestToRestart,
+    ]);
 
     const handleAddBook = () => {
         const id = extractIdFromUrl(bookId);
@@ -140,6 +149,15 @@ const Book = () => {
         });
     };
 
+    const handleRestartBook = () => {
+        const id = extractIdFromUrl(bookId);
+
+        const axiosInstance = axiosPrivateInstance(auth);
+        axiosInstance.get(`/api/books/${id}/restart`).then(({ data }) => {
+            setSentRequestToRestart((prev) => !prev);
+        });
+    };
+
     return (
         <div className="min-h-screen bg-gray-100">
             <div className="container mx-auto p-4">
@@ -162,8 +180,15 @@ const Book = () => {
                                         {findBookCompletion(bookAddedDetails.pageCount, bookAddedDetails.currentPage)}%
                                     </div>
                                 ) : bookAddedDetails.status === "Stopped" ? (
-                                    <div className="bg-red-500 px-4 py-1 rounded-lg shadow-md text-white flex gap-4 items-center justify-between">
-                                        Stopped
+                                    <div className="flex gap-4">
+                                        <div className="bg-red-500 px-4 py-1 rounded-lg shadow-md text-white flex gap-4 items-center justify-between">
+                                            Stopped
+                                        </div>
+                                        <button
+                                            onClick={handleRestartBook}
+                                            className="bg-green-500 text-white px-4 py-1 rounded-lg shadow-md">
+                                            Restart Book
+                                        </button>
                                     </div>
                                 ) : bookAddedDetails.status === "Completed" ? (
                                     <div className="bg-purple-500 px-4 py-1 rounded-lg shadow-md text-white flex gap-4 items-center justify-between">
