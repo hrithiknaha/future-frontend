@@ -4,7 +4,7 @@ import axios from "axios";
 const isDevelopment = process.env.NODE_ENV === "development";
 
 // Set the base URL accordingly
-const baseURL = isDevelopment ? "http://localhost:5001" : "https://future-api-e6df.onrender.com"; // Replace this with your actual production URL
+const baseURL = isDevelopment ? "http://localhost:5001" : "https://future-api.cyclic.cloud";
 
 const axiosPublicInstance = axios.create({
     baseURL,
